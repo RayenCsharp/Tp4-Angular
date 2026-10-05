@@ -1,0 +1,25 @@
+<h1>Panier d'achats</h1>
+<h5>{{ totalItems() }} articles</h5>
+<ul>
+  @for (item of items(); track item.id) {
+    <li>
+      <img [src]="item.photo" height="50" width="50" /> {{ item.name | titlecase }} #{{
+        item.id
+      }}
+      Prix: {{ item.price }} DT <button (click)="updateQuantity(item, 1)">+</button>
+      {{ item.quantity }} <button (click)="updateQuantity(item, -1)">-</button>
+    </li>
+  }
+</ul>
+<button (click)="addItem()">Ajouter une bouteille d'eau (0.7 DT)</button>
+<br />
+<input placeholder="Nom d'article à supprimer" #itemNameSupprime /><button
+  (click)="deleteItem(itemNameSupprime)"
+>
+  Supprimer
+</button>
+<p>Prix total: {{ totalPrice() }} DT</p>
+@if (totalPrice() > 100) {
+  <p>Remise: {{ remise() }} DT</p>
+}
+<p>Prix total: {{ finalPrice() }} DT</p>

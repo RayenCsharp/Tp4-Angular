@@ -1,8 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Counter } from './counter/counter';
+import { Cart } from './cart/cart';
 
 @Component({
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, Counter, Cart],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
