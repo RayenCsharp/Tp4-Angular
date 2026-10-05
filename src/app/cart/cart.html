@@ -1,25 +1,42 @@
-<h1>Panier d'achats</h1>
-<h5>{{ totalItems() }} articles</h5>
-<ul>
-  @for (item of items(); track item.id) {
-    <li>
-      <img [src]="item.photo" height="50" width="50" /> {{ item.name | titlecase }} #{{
-        item.id
-      }}
-      Prix: {{ item.price }} DT <button (click)="updateQuantity(item, 1)">+</button>
-      {{ item.quantity }} <button (click)="updateQuantity(item, -1)">-</button>
-    </li>
-  }
-</ul>
-<button (click)="addItem()">Ajouter une bouteille d'eau (0.7 DT)</button>
-<br />
-<input placeholder="Nom d'article à supprimer" #itemNameSupprime /><button
-  (click)="deleteItem(itemNameSupprime)"
->
-  Supprimer
-</button>
-<p>Prix total: {{ totalPrice() }} DT</p>
-@if (totalPrice() > 100) {
-  <p>Remise: {{ remise() }} DT</p>
-}
-<p>Prix total: {{ finalPrice() }} DT</p>
+<div class="container">
+    <div class="d-flex justify-content-between text-bg-dark p-3 rounded">
+        <h1>Panier d'achats</h1>
+        <h5>{{ totalItems() }} articles</h5>
+    </div>
+    <ul class="list-group">
+    @for (item of items(); track item.id) {
+        <li class="list-group-item d-flex justify-content-between">
+        <div>
+            <img [src]="item.photo" height="50" width="50" />
+            {{ item.name | titlecase }}
+            ID #{{item.id}}
+            <span class="badge text-bg-warning">{{ item.price }} DT</span>
+        </div>
+        <div>
+            <input class type="button" (click)="updateQuantity(item, 1)" value="+" />
+            {{ item.quantity }}
+            <input type="button" (click)="updateQuantity(item, -1)" value="-" />
+        </div>
+        </li>
+    }
+    </ul>
+    <div class ="d-flex justify-content-between mb-3">
+        <button class="btn btn-success"(click)="addItem()">Ajouter une bouteille d'eau (0.7 DT)</button>
+        <div>
+            <input placeholder="Nom d'article à supprimer" #itemNameSupprime />
+            <button class="btn btn-danger"
+            (click)="deleteItem(itemNameSupprime)"
+            >
+            Supprimer
+            </button>
+        </div>
+    </div>
+    <div class ="p-3 rounded"[class] = "{'text-bg-warning': finalPrice() > 100, 'text-bg-dark': finalPrice() <= 100}">
+        <p>Prix total: {{ totalPrice() | number:'.2' }} DT</p>
+        @if (totalPrice() > 100) {
+        <p>Remise: {{ remise() | number:'.2' }} DT</p>
+        }
+        <p>Prix total: {{ finalPrice() | number:'.2' }} DT</p>
+    </div>
+
+</div>

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { signal, WritableSignal, computed, effect } from '@angular/core';
 import { Item } from '../item';
-import { TitleCasePipe } from '@angular/common';
+import { TitleCasePipe, DecimalPipe } from '@angular/common';
 
 @Component({
-  imports: [TitleCasePipe],
+  imports: [TitleCasePipe, DecimalPipe],
   selector: 'app-cart',
   styleUrl: './cart.css',
   templateUrl: './cart.html',
